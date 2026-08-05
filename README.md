@@ -6,6 +6,8 @@
 
 - 11 個循序章節：環境準備、Docker、Compose、Kubernetes 與最終專題
 - 開始前說明硬體／作業系統需求、版本相容規則與七種常見 Kubernetes 實作
+- 十二大主題知識庫：從 Container runtime、Image 供應鏈到 GitOps、正式叢集生命週期與平台治理
+- Production Readiness 上線檢核：Build、Deploy、流量、資料、可靠性、安全、觀測與維運責任
 - 容器、Docker Compose、Kubernetes 三個核心主題的深度基礎導讀
 - 每課包含學習目標、核心觀念、可複製指令、Lab、常見錯誤與小測驗
 - 內建可縮放 SVG 架構圖與情境化指令說明

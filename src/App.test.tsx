@@ -46,4 +46,23 @@ describe('Container Lab', () => {
     expect(screen.getByText('Docker Desktop Kubernetes')).toBeInTheDocument()
     expect(screen.getByText('GKE／EKS／AKS')).toBeInTheDocument()
   })
+
+  it('provides a complete cross-topic container and Kubernetes knowledge atlas', () => {
+    renderApp('/knowledge')
+    expect(screen.getByRole('heading', { name: /把指令背後的系統/ })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Container 從指令到 Linux Process' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Pod 與工作負載選型' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: '從 Image 到 Cluster 的分層安全' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Helm、Kustomize 與 GitOps' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: '正式叢集生命週期與平台治理' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: '上線前，用證據回答八個問題' })).toBeInTheDocument()
+    expect(screen.getByText('確認實際授權與安全設定')).toBeInTheDocument()
+  })
+
+  it('covers production troubleshooting and platform terminology', () => {
+    renderApp('/troubleshooting')
+    expect(screen.getByText('OOMKilled')).toBeInTheDocument()
+    expect(screen.getByText('CreateContainerConfigError')).toBeInTheDocument()
+    expect(screen.getByText('Rollout 卡住')).toBeInTheDocument()
+  })
 })

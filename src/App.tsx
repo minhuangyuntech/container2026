@@ -36,6 +36,7 @@ import { Link, NavLink, Navigate, Route, Routes, useLocation, useParams } from '
 import { CodeBlock } from './components/CodeBlock'
 import { EnvironmentSetupGuide } from './components/EnvironmentSetupGuide'
 import { FoundationDeepDive } from './components/FoundationDeepDive'
+import { KnowledgePage } from './components/KnowledgePage'
 import { SearchDialog } from './components/SearchDialog'
 import {
   dockerLessons,
@@ -69,6 +70,7 @@ function App() {
           <Route path="/" element={<HomePage completed={progress.completed} percentage={progress.percentage} />} />
           <Route path="/learn" element={<Navigate to="/learn/ready" replace />} />
           <Route path="/learn/:lessonId" element={<LessonPage completed={progress.completed} onToggle={progress.toggleCompleted} />} />
+          <Route path="/knowledge" element={<KnowledgePage />} />
           <Route path="/cheatsheet" element={<CheatSheetPage />} />
           <Route path="/troubleshooting" element={<TroubleshootingPage />} />
           <Route path="/glossary" element={<GlossaryPage />} />
@@ -118,6 +120,7 @@ function SiteLayout({ children, completed, percentage }: LayoutProps) {
   const navItems = [
     { to: '/', label: '首頁', end: true },
     { to: '/learn/ready', label: '學習路徑' },
+    { to: '/knowledge', label: '知識庫' },
     { to: '/cheatsheet', label: '速查表' },
     { to: '/troubleshooting', label: '疑難排解' },
   ]
@@ -166,6 +169,7 @@ function SiteLayout({ children, completed, percentage }: LayoutProps) {
         </div>
         <div className="footer-links">
           <Link to="/learn/ready">開始學習</Link>
+          <Link to="/knowledge">完整知識庫</Link>
           <Link to="/cheatsheet">指令速查</Link>
           <Link to="/glossary">名詞表</Link>
           <a href="https://docs.docker.com/" target="_blank" rel="noreferrer">Docker Docs <ExternalLink size={13} /></a>

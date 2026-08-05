@@ -2,6 +2,7 @@ import { ArrowRight, BookOpen, Search, Wrench, X } from 'lucide-react'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { useNavigate } from '../router'
 import { lessons } from '../data/curriculum'
+import { knowledgeDomains } from '../data/knowledge'
 import { glossary, troubleshooting } from '../data/reference'
 
 type SearchDialogProps = {
@@ -36,13 +37,23 @@ export function SearchDialog({ open, onClose }: SearchDialogProps) {
     const lessonResults = lessons
       .filter((lesson) => [lesson.title, lesson.shortTitle, lesson.summary, ...lesson.objectives].join(' ').toLowerCase().includes(normalized))
       .map((lesson) => ({ type: '課程', icon: BookOpen, title: lesson.title, detail: lesson.summary, path: `/learn/${lesson.id}` }))
+    const knowledgeResults = knowledgeDomains
+      .filter((domain) => [
+        domain.category,
+        domain.title,
+        domain.summary,
+        domain.mentalModel,
+        ...domain.points.flatMap((point) => [point.title, point.body]),
+        ...domain.decisions.flatMap((decision) => [decision.scenario, decision.choose, decision.reason]),
+      ].join(' ').toLowerCase().includes(normalized))
+      .map((domain) => ({ type: '知識庫', icon: BookOpen, title: domain.title, detail: domain.summary, path: '/knowledge' }))
     const termResults = glossary
       .filter((item) => [item.term, item.zh, item.definition].join(' ').toLowerCase().includes(normalized))
       .map((item) => ({ type: '名詞', icon: Search, title: `${item.term} · ${item.zh}`, detail: item.definition, path: '/glossary' }))
     const issueResults = troubleshooting
       .filter((item) => [item.status, item.symptom, item.area].join(' ').toLowerCase().includes(normalized))
       .map((item) => ({ type: '除錯', icon: Wrench, title: item.status, detail: item.symptom, path: '/troubleshooting' }))
-    return [...lessonResults, ...termResults, ...issueResults].slice(0, 8)
+    return [...lessonResults, ...knowledgeResults, ...termResults, ...issueResults].slice(0, 8)
   }, [query])
 
   if (!open) return null
