@@ -5,6 +5,7 @@
 ## 網站內容
 
 - 11 個循序章節：環境準備、Docker、Compose、Kubernetes 與最終專題
+- 開始前說明硬體／作業系統需求、版本相容規則與七種常見 Kubernetes 實作
 - 容器、Docker Compose、Kubernetes 三個核心主題的深度基礎導讀
 - 每課包含學習目標、核心觀念、可複製指令、Lab、常見錯誤與小測驗
 - 內建可縮放 SVG 架構圖與情境化指令說明
@@ -51,6 +52,10 @@ docker run --rm -p 8080:80 container-lab:local
 瀏覽 `http://localhost:8080`，健康檢查端點為 `http://localhost:8080/healthz`。
 
 ## Kubernetes
+
+教材以 **Kubernetes v1.36** 為基準，範例使用穩定的 `core/v1` 與 `apps/v1` API，預期可在仍受上游維護的 v1.34–v1.36 執行。建議使用 kubectl v1.35 或 v1.36；依 Kubernetes 官方政策，kubectl 可與 kube-apiserver 相差一個 minor version。
+
+Windows 與 macOS 初學者建議使用 Docker Desktop 內建 Kubernetes；若希望快速建立、刪除並重建練習叢集，建議使用 kind。
 
 先讓本機叢集能取得 `container-lab:local` Image，再套用 manifests：
 

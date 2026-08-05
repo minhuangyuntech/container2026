@@ -34,6 +34,7 @@ import {
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { Link, NavLink, Navigate, Route, Routes, useLocation, useParams } from './router'
 import { CodeBlock } from './components/CodeBlock'
+import { EnvironmentSetupGuide } from './components/EnvironmentSetupGuide'
 import { FoundationDeepDive } from './components/FoundationDeepDive'
 import { SearchDialog } from './components/SearchDialog'
 import {
@@ -337,6 +338,7 @@ function LessonPage({ completed, onToggle }: LessonPageProps) {
   const next = getNextLesson(lesson.id)
   const done = completed.includes(lesson.id)
   const foundationGuide = getFoundationGuide(lesson.id)
+  const hasExtendedGuide = Boolean(foundationGuide) || lesson.id === 'ready'
 
   return (
     <div className="learning-shell">
@@ -382,10 +384,11 @@ function LessonPage({ completed, onToggle }: LessonPageProps) {
           <ul>{lesson.objectives.map((objective) => <li key={objective}><CheckCircle2 size={18} />{objective}</li>)}</ul>
         </section>
 
+        {lesson.id === 'ready' && <EnvironmentSetupGuide />}
         {foundationGuide && <FoundationDeepDive guide={foundationGuide} />}
 
         <section className="lesson-section">
-          <div className="section-index">{foundationGuide ? '02' : '01'}</div>
+          <div className="section-index">{hasExtendedGuide ? '02' : '01'}</div>
           <div className="lesson-section-body">
             <span className="mini-label">CORE CONCEPT</span>
             <h2>先建立正確的心智模型</h2>
@@ -399,7 +402,7 @@ function LessonPage({ completed, onToggle }: LessonPageProps) {
         </section>
 
         <section className="lesson-section">
-          <div className="section-index">{foundationGuide ? '03' : '02'}</div>
+          <div className="section-index">{hasExtendedGuide ? '03' : '02'}</div>
           <div className="lesson-section-body">
             <span className="mini-label">HANDS-ON LAB</span>
             <h2>{lesson.lab.title}</h2>
@@ -415,7 +418,7 @@ function LessonPage({ completed, onToggle }: LessonPageProps) {
         </section>
 
         <section className="lesson-section">
-          <div className="section-index">{foundationGuide ? '04' : '03'}</div>
+          <div className="section-index">{hasExtendedGuide ? '04' : '03'}</div>
           <div className="lesson-section-body">
             <span className="mini-label">DEBUG MINDSET</span>
             <h2>常見卡關點</h2>

@@ -37,4 +37,13 @@ describe('Container Lab', () => {
     expect(screen.getByRole('img', { name: /傳統安裝與容器化執行模型比較/ })).toBeInTheDocument()
     expect(screen.getByText('docker inspect web')).toBeInTheDocument()
   })
+
+  it('explains environment requirements, implementations, and the course version baseline', () => {
+    renderApp('/learn/ready')
+    expect(screen.getByRole('heading', { name: '先決定版本，再選擇 Kubernetes 實作' })).toBeInTheDocument()
+    expect(screen.getByText('Kubernetes v1.36')).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: '七種常見實作，先選最符合學習目的的' })).toBeInTheDocument()
+    expect(screen.getByText('Docker Desktop Kubernetes')).toBeInTheDocument()
+    expect(screen.getByText('GKE／EKS／AKS')).toBeInTheDocument()
+  })
 })
